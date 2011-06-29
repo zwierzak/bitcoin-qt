@@ -2,7 +2,8 @@ TEMPLATE = app
 TARGET =
 DEPENDPATH += .
 INCLUDEPATH += src src/json src/cryptopp src/qt /usr/include/db4.8
-DEFINES += QT_GUI
+
+QT += core gui dbus
 
 # for boost 1.37, add -mt to the boost libraries
 unix:LIBS += -lssl -lcrypto -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -ldb_cxx
@@ -121,5 +122,3 @@ FORMS += \
 
 CODECFORTR = UTF-8
 TRANSLATIONS = src/qt/locale/bitcoin_nl.ts
-
-QT += dbus
