@@ -39,6 +39,8 @@ This has to be done:
 
 - Build on Windows
 
+- Notification by Freedesktop Notify (require working DBus)
+
 Build instructions
 ===================
 

@@ -1,8 +1,9 @@
 TEMPLATE = app
 TARGET =
 DEPENDPATH += .
-INCLUDEPATH += src src/json src/cryptopp src/qt
-DEFINES += QT_GUI
+INCLUDEPATH += src src/json src/cryptopp src/qt /usr/include/db4.8
+
+QT += core gui dbus
 
 # for boost 1.37, add -mt to the boost libraries
 unix:LIBS += -lssl -lcrypto -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -ldb_cxx
@@ -72,7 +73,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/transactiondescdialog.h \
     src/qt/bitcoinamountfield.h \
     src/wallet.h \
-    src/keystore.h
+    src/keystore.h \
+    src/qt/notifiction.h
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
     src/qt/addresstablemodel.cpp \
@@ -105,7 +107,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/bitcoinstrings.cpp \
     src/qt/bitcoinamountfield.cpp \
     src/wallet.cpp \
-    src/keystore.cpp
+    src/keystore.cpp \
+    src/qt/notifiction.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
