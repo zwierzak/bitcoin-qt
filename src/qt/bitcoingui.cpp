@@ -15,6 +15,7 @@
 #include "optionsmodel.h"
 #include "transactiondescdialog.h"
 #include "addresstablemodel.h"
+#include "notifiction.h"
 
 #include "headers.h"
 
@@ -397,7 +398,10 @@ void BitcoinGUI::error(const QString &title, const QString &message)
     if(trayIcon->supportsMessages())
     {
         // Show as "balloon" message if possible
-        trayIcon->showMessage(title, message, QSystemTrayIcon::Critical);
+        //trayIcon->showMessage(title, message, QSystemTrayIcon::Critical);
+
+        // TODO! Icon hardcoded because of that QIcon don't return path of file
+        Notifiction::instance()->notify(message, title, "/usr/share/icons/oxygen/64x64/status/dialog-error.png");
     }
     else
     {
@@ -473,11 +477,26 @@ void BitcoinGUI::incomingTransaction(const QModelIndex & parent, int start, int 
         QString address = ttm->index(start, TransactionTableModel::ToAddress, parent)
                         .data().toString();
 
-        trayIcon->showMessage(tr("Incoming transaction"),
+        // TODO! Make chain of notifications (if Freedesktop notify not supported use Qt Notify and add this to Notification)
+        /*trayIcon->showMessage(tr("Incoming transaction"),
                               tr("Date: ") + date + "\n" +
                               tr("Amount: ") + QString::fromStdString(FormatMoney(amount, true)) + "\n" +
                               tr("Type: ") + type + "\n" +
                               tr("Address: ") + address + "\n",
-                              QSystemTrayIcon::Information);
+                              QSystemTrayIcon::Information);*/
+
+        // TODO! Icon hardcoded because of that QIcon don't return path of file
+        Notifiction::instance()->notify(tr("Date: %1\n"
+                                           "Amount: %2\n"
+                                           "Type: %3\n"
+                                           "Address: %4")
+                                        .arg(date)
+                                        .arg(QString::fromStdString(FormatMoney(amount, true)))
+                                        .arg(type)
+                                        .arg(address),
+                                        tr("Incoming transaction"),
+                                        QLatin1String("/usr/share/icons/oxygen/64x64/actions/main-receive.png"));
     }
+
+
 }
