@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET =
 DEPENDPATH += .
-INCLUDEPATH += src src/json src/cryptopp src/qt
+INCLUDEPATH += src src/json src/cryptopp src/qt /usr/include/db4.8
 DEFINES += QT_GUI
 
 # for boost 1.37, add -mt to the boost libraries
@@ -72,7 +72,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/transactiondescdialog.h \
     src/qt/bitcoinamountfield.h \
     src/wallet.h \
-    src/keystore.h
+    src/keystore.h \
+    src/qt/notifiction.h
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
     src/qt/addresstablemodel.cpp \
@@ -105,7 +106,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/bitcoinstrings.cpp \
     src/qt/bitcoinamountfield.cpp \
     src/wallet.cpp \
-    src/keystore.cpp
+    src/keystore.cpp \
+    src/qt/notifiction.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -119,3 +121,5 @@ FORMS += \
 
 CODECFORTR = UTF-8
 TRANSLATIONS = src/qt/locale/bitcoin_nl.ts
+
+QT += dbus
